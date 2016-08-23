@@ -248,7 +248,7 @@ static obs_properties_t *MFH264_GetProperties(void *)
 static void MFH264_GetDefaults(obs_data_t *settings)
 {
 #define PROP_DEF(x, y, z) obs_data_set_default_ ## x(settings, y, z)
-	PROP_DEF(int,    MFP_BITRATE,         2500);
+	PROP_DEF(int,    MFP_BITRATE,         850);
 	PROP_DEF(bool,   MFP_USE_LOWLAT,      true);
 	PROP_DEF(int,    MFP_B_FRAMES,        2);
 	PROP_DEF(bool,   MFP_USE_BUF_SIZE,    false);

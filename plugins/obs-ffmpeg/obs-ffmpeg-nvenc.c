@@ -366,7 +366,7 @@ static bool nvenc_encode(void *data, struct encoder_frame *frame,
 
 static void nvenc_defaults(obs_data_t *settings)
 {
-	obs_data_set_default_int(settings, "bitrate", 2500);
+	obs_data_set_default_int(settings, "bitrate", 850);
 	obs_data_set_default_int(settings, "keyint_sec", 0);
 	obs_data_set_default_int(settings, "cqp", 23);
 	obs_data_set_default_string(settings, "rate_control", "CBR");

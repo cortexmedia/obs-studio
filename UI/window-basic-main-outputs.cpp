@@ -436,8 +436,11 @@ void SimpleOutput::UpdateRecordingSettings_x264_crf(int crf)
 	obs_data_set_bool(settings, "use_bufsize", true);
 	obs_data_set_string(settings, "rate_control", "CRF");
 	obs_data_set_string(settings, "profile", "high");
-	obs_data_set_string(settings, "preset",
-			lowCPUx264 ? "ultrafast" : "veryfast");
+	// obs_data_set_string(settings, "preset",
+	// 		lowCPUx264 ? "ultrafast" : "veryfast");
+
+	// DaCast: Always use "veryfast" preset
+	obs_data_set_string(settings, "preset", "veryfast");
 
 	obs_encoder_update(h264Recording, settings);
 

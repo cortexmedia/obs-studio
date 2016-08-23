@@ -814,14 +814,14 @@ bool OBSBasic::InitBasicConfigDefaults()
 	config_set_default_string(basicConfig, "SimpleOutput", "FilePath",
 			GetDefaultVideoSavePath().c_str());
 	config_set_default_string(basicConfig, "SimpleOutput", "RecFormat",
-			"flv");
+			"mp4");
 	config_set_default_uint  (basicConfig, "SimpleOutput", "VBitrate",
-			2500);
+			850);
 	config_set_default_string(basicConfig, "SimpleOutput", "StreamEncoder",
 			SIMPLE_ENCODER_X264);
-	config_set_default_uint  (basicConfig, "SimpleOutput", "ABitrate", 160);
+	config_set_default_uint  (basicConfig, "SimpleOutput", "ABitrate", 64);
 	config_set_default_bool  (basicConfig, "SimpleOutput", "UseAdvanced",
-			false);
+			true);
 	config_set_default_bool  (basicConfig, "SimpleOutput", "EnforceBitrate",
 			true);
 	config_set_default_string(basicConfig, "SimpleOutput", "Preset",
@@ -841,7 +841,7 @@ bool OBSBasic::InitBasicConfigDefaults()
 
 	config_set_default_string(basicConfig, "AdvOut", "RecFilePath",
 			GetDefaultVideoSavePath().c_str());
-	config_set_default_string(basicConfig, "AdvOut", "RecFormat", "flv");
+	config_set_default_string(basicConfig, "AdvOut", "RecFormat", "mp4");
 	config_set_default_bool  (basicConfig, "AdvOut", "RecUseRescale",
 			false);
 	config_set_default_uint  (basicConfig, "AdvOut", "RecTracks", (1<<0));
@@ -853,16 +853,16 @@ bool OBSBasic::InitBasicConfigDefaults()
 	config_set_default_string(basicConfig, "AdvOut", "FFFilePath",
 			GetDefaultVideoSavePath().c_str());
 	config_set_default_string(basicConfig, "AdvOut", "FFExtension", "mp4");
-	config_set_default_uint  (basicConfig, "AdvOut", "FFVBitrate", 2500);
+	config_set_default_uint  (basicConfig, "AdvOut", "FFVBitrate", 850);
 	config_set_default_bool  (basicConfig, "AdvOut", "FFUseRescale",
 			false);
-	config_set_default_uint  (basicConfig, "AdvOut", "FFABitrate", 160);
+	config_set_default_uint  (basicConfig, "AdvOut", "FFABitrate", 64);
 	config_set_default_uint  (basicConfig, "AdvOut", "FFAudioTrack", 1);
 
-	config_set_default_uint  (basicConfig, "AdvOut", "Track1Bitrate", 160);
-	config_set_default_uint  (basicConfig, "AdvOut", "Track2Bitrate", 160);
-	config_set_default_uint  (basicConfig, "AdvOut", "Track3Bitrate", 160);
-	config_set_default_uint  (basicConfig, "AdvOut", "Track4Bitrate", 160);
+	config_set_default_uint  (basicConfig, "AdvOut", "Track1Bitrate", 64);
+	config_set_default_uint  (basicConfig, "AdvOut", "Track2Bitrate", 64);
+	config_set_default_uint  (basicConfig, "AdvOut", "Track3Bitrate", 64);
+	config_set_default_uint  (basicConfig, "AdvOut", "Track4Bitrate", 64);
 
 	config_set_default_uint  (basicConfig, "Video", "BaseCX",   cx);
 	config_set_default_uint  (basicConfig, "Video", "BaseCY",   cy);
@@ -874,7 +874,7 @@ bool OBSBasic::InitBasicConfigDefaults()
 	config_set_default_uint  (basicConfig, "Output", "DelaySec", 20);
 	config_set_default_bool  (basicConfig, "Output", "DelayPreserve", true);
 
-	config_set_default_bool  (basicConfig, "Output", "Reconnect", true);
+	config_set_default_bool  (basicConfig, "Output", "Reconnect", false);
 	config_set_default_uint  (basicConfig, "Output", "RetryDelay", 10);
 	config_set_default_uint  (basicConfig, "Output", "MaxRetries", 20);
 
