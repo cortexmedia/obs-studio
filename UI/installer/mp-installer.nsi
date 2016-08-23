@@ -1,9 +1,9 @@
 ; Script generated with the Venis Install Wizard
 
 ; Define your application name
-!define APPNAME "OBS Studio"
+!define APPNAME "OBS|DaCast"
 !define APPVERSION "0.13.4"
-!define APPNAMEANDVERSION "OBS Studio ${APPVERSION}"
+!define APPNAMEANDVERSION "OBS|DaCast ${APPVERSION}"
 ; !define BROWSER
 
 ; Additional script dependencies
@@ -177,7 +177,7 @@ FunctionEnd
 
 Var outputErrors
 
-Section "OBS Studio" Section1
+Section "OBS|DaCast" Section1
 
 	; Set Section properties
 	SetOverwrite on
@@ -219,14 +219,14 @@ Section "OBS Studio" Section1
 	${endif}
 
 	SetOutPath "$INSTDIR\bin\32bit"
-	CreateShortCut "$DESKTOP\OBS Studio.lnk" "$INSTDIR\bin\32bit\obs32.exe"
-	CreateDirectory "$SMPROGRAMS\OBS Studio"
-	CreateShortCut "$SMPROGRAMS\OBS Studio\OBS Studio (32bit).lnk" "$INSTDIR\bin\32bit\obs32.exe"
-	CreateShortCut "$SMPROGRAMS\OBS Studio\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+	CreateShortCut "$DESKTOP\OBS|DaCast.lnk" "$INSTDIR\bin\32bit\obs32.exe"
+	CreateDirectory "$SMPROGRAMS\OBS|DaCast"
+	CreateShortCut "$SMPROGRAMS\OBS|DaCast\OBS|DaCast (32bit).lnk" "$INSTDIR\bin\32bit\obs32.exe"
+	CreateShortCut "$SMPROGRAMS\OBS|DaCast\Uninstall.lnk" "$INSTDIR\uninstall.exe"
 
 	${if} ${RunningX64}
 		SetOutPath "$INSTDIR\bin\64bit"
-		CreateShortCut "$SMPROGRAMS\OBS Studio\OBS Studio (64bit).lnk" "$INSTDIR\bin\64bit\obs64.exe"
+		CreateShortCut "$SMPROGRAMS\OBS|DaCast\OBS|DaCast (64bit).lnk" "$INSTDIR\bin\64bit\obs64.exe"
 	${endif}
 
 	SetOutPath "$INSTDIR\bin\32bit"
@@ -266,11 +266,11 @@ Section "un.obs-studio Program Files"
 	Delete "$INSTDIR\uninstall.exe"
 
 	; Delete Shortcuts
-	Delete "$DESKTOP\OBS Studio.lnk"
-	Delete "$SMPROGRAMS\OBS Studio\OBS Studio (32bit).lnk"
-	Delete "$SMPROGRAMS\OBS Studio\Uninstall.lnk"
+	Delete "$DESKTOP\OBS|DaCast.lnk"
+	Delete "$SMPROGRAMS\OBS|DaCast\OBS|DaCast (32bit).lnk"
+	Delete "$SMPROGRAMS\OBS|DaCast\Uninstall.lnk"
 	${if} ${RunningX64}
-		Delete "$SMPROGRAMS\OBS Studio\OBS Studio (64bit).lnk"
+		Delete "$SMPROGRAMS\OBS|DaCast\OBS|DaCast (64bit).lnk"
 	${endif}
 
 	; Clean up OBS Studio
@@ -280,8 +280,8 @@ Section "un.obs-studio Program Files"
 	RMDir "$INSTDIR"
 
 	; Remove remaining directories
-	RMDir "$SMPROGRAMS\OBS Studio"
-	RMDir "$INSTDIR\OBS Studio"
+	RMDir "$SMPROGRAMS\OBS|DaCast"
+	RMDir "$INSTDIR\OBS|DaCast"
 SectionEnd
 
 Section /o "un.User Settings" Section2
@@ -295,11 +295,11 @@ SectionEnd
 
 ; Version information
 VIProductVersion "0.${APPVERSION}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "OBS Studio"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "OBS|DaCast"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "obsproject.com"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "(c) 2012-2016"
 ; FileDescription is what shows in the UAC elevation prompt when signed
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "OBS Studio"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "OBS|DaCast"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "1.0"
 
 ; eof

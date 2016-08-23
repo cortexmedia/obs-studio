@@ -4455,7 +4455,7 @@ void OBSBasic::UpdateTitleBar()
 	const char *sceneCollection = config_get_string(App()->GlobalConfig(),
 			"Basic", "SceneCollection");
 
-	name << "OBS ";
+	name << "OBS|DaCast ";
 	if (previewProgramMode)
 		name << "Studio ";
 
@@ -4551,7 +4551,7 @@ void OBSBasic::SetShowing(bool showing)
 void OBSBasic::SystemTrayInit() {
 	trayIcon = new QSystemTrayIcon(QIcon(":/res/images/obs.png"),
 			this);
-	trayIcon->setToolTip("OBS Studio");
+	trayIcon->setToolTip("OBS|DaCast");
 
 	showHide = new QAction(QTStr("Basic.SystemTray.Show"),
 			trayIcon);
@@ -4594,7 +4594,7 @@ void OBSBasic::SysTrayNotify(const QString &text,
 	if (QSystemTrayIcon::supportsMessages()) {
 		QSystemTrayIcon::MessageIcon icon =
 				QSystemTrayIcon::MessageIcon(n);
-		trayIcon->showMessage("OBS Studio", text, icon, 10000);
+		trayIcon->showMessage("OBS|DaCast", text, icon, 10000);
 	}
 }
 

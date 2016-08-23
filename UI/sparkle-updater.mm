@@ -46,7 +46,7 @@ static inline bool equali(NSString *a, NSString *b)
 		item = app;
 
 	NSBundle *host = updater.hostBundle;
-	if (mpkg && (!app || equali(host.bundlePath, @"/Applications/OBS.app")))
+	if (mpkg && (!app || equali(host.bundlePath, @"/Applications/OBS|DaCast.app")))
 		item = mpkg;
 
 	NSMutableDictionary *dict = [NSMutableDictionary
@@ -105,7 +105,7 @@ static inline bool bundle_matches(NSBundle *bundle)
 		return false;
 
 	NSRange r = [bundle.executablePath rangeOfString:@"Contents/MacOS/"];
-	return [bundle.bundleIdentifier isEqual:@"com.obsproject.obs-studio"] &&
+	return [bundle.bundleIdentifier isEqual:@"com.dacast.obs-studio"] &&
 	       r.location != NSNotFound;
 }
 
