@@ -41,7 +41,9 @@ bool obs_display_init(struct obs_display *display,
 		return false;
 	}
 
-	display->background_color = 0x4C4C4C;
+	// DaCast: display white backdrop
+	display->background_color = 0xFFFFFF;
+	// display->background_color = 0x4C4C4C;
 	display->enabled = true;
 	return true;
 }

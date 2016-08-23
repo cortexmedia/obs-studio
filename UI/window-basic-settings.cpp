@@ -2230,15 +2230,16 @@ void OBSBasicSettings::SaveGeneralSettings()
 		config_set_string(GetGlobalConfig(), "General", "Language",
 				language.c_str());
 
-	int themeIndex = ui->theme->currentIndex();
-	QString themeData = ui->theme->itemText(themeIndex);
-	string theme = themeData.toStdString();
+	// DaCast: disable theme setting
+	// int themeIndex = ui->theme->currentIndex();
+	// QString themeData = ui->theme->itemText(themeIndex);
+	// string theme = themeData.toStdString();
 
-	if (WidgetChanged(ui->theme)) {
-		config_set_string(GetGlobalConfig(), "General", "Theme",
-				  theme.c_str());
-		App()->SetTheme(theme);
-	}
+	// if (WidgetChanged(ui->theme)) {
+	// 	config_set_string(GetGlobalConfig(), "General", "Theme",
+	// 			  theme.c_str());
+	// 	App()->SetTheme(theme);
+	// }
 
 	if (WidgetChanged(ui->snappingEnabled))
 		config_set_bool(GetGlobalConfig(), "BasicWindow",

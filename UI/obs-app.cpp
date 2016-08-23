@@ -668,15 +668,18 @@ bool OBSApp::SetTheme(std::string name, std::string path)
 
 bool OBSApp::InitTheme()
 {
-	const char *themeName = config_get_string(globalConfig, "General",
-			"Theme");
+	// DaCast: always use custom theme
+	return SetTheme("DaCast");
 
-	if (!themeName)
-		themeName = "Default";
+	// const char *themeName = config_get_string(globalConfig, "General",
+	// 		"Theme");
 
-	stringstream t;
-	t << themeName;
-	return SetTheme(t.str());
+	// if (!themeName)
+	// 	themeName = "Default";
+
+	// stringstream t;
+	// t << themeName;
+	// return SetTheme(t.str());
 }
 
 OBSApp::OBSApp(int &argc, char **argv, profiler_name_store_t *store)

@@ -1,0 +1,231 @@
+/* Themes are created using Qt CSS, you can visit */
+/* http://doc.qt.io/qt-5/stylesheet-reference.html and */
+/* http://doc.qt.io/qt-5/stylesheet-examples.html for examples. */
+
+/* Colors */
+
+/* rgb(238,238,238); /* lightGray */
+/* rgb(122,121,122); /* mediumGray */
+/* rgb(46,45,46); /* dark */
+/* rgb(44, 107, 162); /* blue */
+/* rgb(20,143,175); /* blueish */
+/* rgb(231,146,16); /* orange */
+/* rgb(192,120,13); /* darkOrange */
+
+
+/* General style, we override only what is needed. */
+QWidget {
+    background-color: rgb(238,238,238); /* lightGray */
+    color: rgb(20,143,175); /* blueish */
+    selection-background-color: rgb(244,244,244);
+    selection-color: black;
+    font-size: 11px;
+}
+
+* [frameShape="1"], * [frameShape="2"], * [frameShape="3"], * [frameShape="4"], * [frameShape="5"], * [frameShape="6"] {
+    border: 1px solid rgb(20,143,175); /* blueish */
+}
+
+
+/* Misc */
+
+QAbstractItemView {
+    background-color: white;
+}
+
+
+/* Scenes and Sources toolbar */
+
+QToolBar {
+    background-color: rgb(238,238,238); /* lightGray */
+    border: none;
+}
+
+QToolButton:hover {
+    background-color: rgb(238,238,238); /* lightGray */
+    border-radius: none;
+}
+
+QToolButton:pressed {
+    background-color: rgb(238,238,238); /* lightGray */
+    border-radius: none;
+}
+
+* [themeID="addIconSmall"] {
+    qproperty-icon: url(./DaCast/plus.png);
+}
+
+* [themeID="removeIconSmall"] {
+    qproperty-icon: url(./DaCast/minus.png);
+}
+
+* [themeID="propertiesIconSmall"] {
+    qproperty-icon: url(./DaCast/cogwheel.png);
+}
+
+* [themeID="configIconSmall"] {
+    qproperty-icon: url(./DaCast/cogwheel.png);
+}
+
+* [themeID="upArrowIconSmall"] {
+    qproperty-icon: url(./DaCast/up_arrow.png);
+}
+
+* [themeID="downArrowIconSmall"] {
+    qproperty-icon: url(./DaCast/down_arrow.png);
+}
+
+
+/* ComboBox */
+
+QComboBox {
+    color: rgb(46,45,46); /* dark */
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 2px;
+    padding-left: 10px;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QComboBox::down-arrow {
+    qproperty-alignment: AlignTop;
+    image: url(./DaCast/combobox.png);
+    width: 5%;
+}
+
+
+/* Textedits etc */
+
+QLineEdit, QTextEdit, QPlainTextEdit {
+    color: rgb(46,45,46); /* dark */
+    background-color: white;
+    padding: 2px;
+    padding-left: 10px;
+    border: none;
+    border-radius: 4px;
+    padding-left: 2px;
+}
+
+
+/* Spinbox and doubleSpinbox */
+
+QSpinBox, QDoubleSpinBox {
+    color: rgb(46,45,46); /* dark */
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 15px;
+    margin-right: 10px;
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+    subcontrol-origin: margin;
+    subcontrol-position: top right; /* position at the top right corner */
+
+    background-color: white;
+    border: 1px solid rgb(31,30,31); /* veryDark */
+    border-radius: 4px;
+    border-width: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-width: 0;
+}
+
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-origin: margin;
+    subcontrol-position: bottom right; /* position at the top right corner */
+    background-color: white;
+    border: 1px solid rgb(31,30,31); /* veryDark */
+    border-radius: 4px;
+    border-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-width: 0;
+}
+
+QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
+    image: url(./DaCast/up_arrow.png);
+    width: 100%;
+}
+
+QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
+    image: url(./DaCast/down_arrow.png);
+    width: 100%;
+}
+
+
+/* Buttons */
+
+QPushButton {
+    color: white;
+    background-color: rgb(231,146,16); /* orange */
+    border-radius: 4px;
+    margin: 1px;
+    padding: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+QPushButton::flat {
+    background-color: rgb(238,238,238); /* lightGray */
+}
+
+QPushButton:hover {
+    color: white;
+    background-color: rgb(231,146,16); /* orange */
+}
+
+QPushButton:pressed {
+    color: white;
+    background-color: rgb(192,120,13); /* darkOrange */
+}
+
+QPushButton:checked {
+    color: white;
+    background-color: rgb(192,120,13); /* darkOrange */
+}
+
+/* Volume Control */
+
+MuteCheckBox {
+    outline: none;
+}
+
+MuteCheckBox::indicator:checked {
+    image: url(./DaCast/mute.png);
+}
+
+MuteCheckBox::indicator:unchecked {
+    image: url(./DaCast/unmute.png);
+}
+
+OBSHotkeyLabel[hotkeyPairHover=true] {
+    color: red;
+}
+
+VolumeMeter {
+    qproperty-bkColor: rgb(221, 221, 221);
+    qproperty-magColor: rgb(32, 125, 23);
+    qproperty-peakColor: rgb(62, 241, 43);
+    qproperty-peakHoldColor: rgb(0, 0, 0);
+}
+
+
+/* Label warning/error */
+
+QLabel#warningLabel {
+    color: rgb(192, 128, 0);
+    font-weight: bold;
+}
+
+QLabel#errorLabel {
+    color: rgb(192, 0, 0);
+    font-weight: bold;
+}
