@@ -3960,7 +3960,7 @@ void OBSBasic::on_settingsButton_clicked()
 
 void OBSBasic::on_actionWebsite_triggered()
 {
-	QUrl url = QUrl("https://obsproject.com", QUrl::TolerantMode);
+	QUrl url = QUrl("http://dacast.com", QUrl::TolerantMode);
 	QDesktopServices::openUrl(url);
 }
 
