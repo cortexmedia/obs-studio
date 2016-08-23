@@ -1430,7 +1430,17 @@ int GetConfigPath(char *path, size_t size, const char *name)
 			return snprintf(path, size, CONFIG_PATH);
 		}
 	} else {
-		return os_get_config_path(path, size, name);
+		int len = os_get_config_path(path, size, "DaCast");
+		if (len < 0) {
+			return len;
+		}
+
+		int len2 = snprintf(path + len, size - len, "/%s", name);
+		if (len2 < 0) {
+			return len2;
+		}
+
+		return len + len2;
 	}
 }
 
@@ -1445,18 +1455,52 @@ char *GetConfigPathPtr(const char *name)
 			return NULL;
 		}
 	} else {
-		return os_get_config_path_ptr(name);
+		char path[512];
+		const size_t size = sizeof path;
+
+		int len = os_get_config_path(path, size, "DaCast");
+		if (len < 0) {
+			return NULL;
+		}
+
+		if (snprintf(path + len, size - len, "/%s", name) < 0) {
+			return NULL;
+		}
+
+		return bstrdup(path);
 	}
 }
 
 int GetProgramDataPath(char *path, size_t size, const char *name)
 {
-	return os_get_program_data_path(path, size, name);
+	int len = os_get_program_data_path(path, size, "DaCast");
+	if (len < 0) {
+		return len;
+	}
+
+	int len2 = snprintf(path + len, size - len, "/%s", name);
+	if (len2 < 0) {
+		return len2;
+	}
+
+	return len + len2;
 }
 
 char *GetProgramDataPathPtr(const char *name)
 {
-	return os_get_program_data_path_ptr(name);
+	char path[512];
+	const size_t size = sizeof path;
+
+	int len = os_get_program_data_path(path, size, "DaCast");
+	if (len < 0) {
+		return NULL;
+	}
+
+	if (snprintf(path + len, size - len, "/%s", name) < 0) {
+		return NULL;
+	}
+
+	return bstrdup(path);
 }
 
 bool GetFileSafeName(const char *name, std::string &file)
