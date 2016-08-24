@@ -3182,27 +3182,56 @@ void OBSBasic::AddSource(const char *id)
 	}
 }
 
+int input_type_order(const string &type) {
+	if (type == "dshow_input") return 0;
+	if (type == "av_capture_input") return 0;
+	if (type == "coreaudio_input_capture") return 1;
+	if (type == "alsa_input_capture") return 1;
+	if (type == "pulse_input_capture") return 1;
+	if (type == "wasapi_input_capture") return 1;
+	if (type == "display_capture") return 2;
+	if (type == "monitor_capture") return 2;
+	if (type == "window_capture") return 3;
+	if (type == "text_gdiplus") return 4;
+	if (type == "text_ft2_source") return 4;
+	if (type == "image_source") return 5;
+	if (type == "slideshow") return 6;
+	if (type == "ffmpeg_source") return 7;
+	if (type == "coreaudio_output_capture") return 8;
+	if (type == "jack_output_capture") return 8;
+	if (type == "pulse_output_capture") return 8;
+	if (type == "wasapi_output_capture") return 8;
+
+	return INT_MAX;
+};
+
+bool input_type_comparator(const string &a, const string &b) {
+	return input_type_order(a) < input_type_order(b);
+}
+
 QMenu *OBSBasic::CreateAddSourcePopupMenu()
 {
 	const char *type;
+	vector<string> input_types;
 	bool foundValues = false;
 	size_t idx = 0;
 
 	QMenu *popup = new QMenu(QTStr("Add"), this);
 
-	auto getActionAfter = [] (QMenu *menu, const QString &name)
-	{
-		QList<QAction*> actions = menu->actions();
+	// DaCast: use specific sort order defined by input_type_order function
+	// auto getActionAfter = [] (QMenu *menu, const QString &name)
+	// {
+	// 	QList<QAction*> actions = menu->actions();
 
-		for (QAction *menuAction : actions) {
-			if (menuAction->text().compare(name) >= 0)
-				return menuAction;
-		}
+	// 	for (QAction *menuAction : actions) {
+	// 		if (menuAction->text().compare(name) >= 0)
+	// 			return menuAction;
+	// 	}
 
-		return (QAction*)nullptr;
-	};
+	// 	return (QAction*)nullptr;
+	// };
 
-	auto addSource = [this, getActionAfter] (QMenu *popup,
+	auto addSource = [this/*, getActionAfter*/] (QMenu *popup,
 			const char *type, const char *name)
 	{
 		QString qname = QT_UTF8(name);
@@ -3211,11 +3240,20 @@ QMenu *OBSBasic::CreateAddSourcePopupMenu()
 		connect(popupItem, SIGNAL(triggered(bool)),
 				this, SLOT(AddSourceFromAction()));
 
-		QAction *after = getActionAfter(popup, qname);
-		popup->insertAction(after, popupItem);
+		// QAction *after = getActionAfter(popup, qname);
+		// popup->insertAction(after, popupItem);
+
+		popup->addAction(popupItem);
 	};
 
 	while (obs_enum_input_types(idx++, &type)) {
+		input_types.push_back(type);
+	}
+
+	sort(input_types.begin(), input_types.end(), input_type_comparator);
+
+	for (auto &type_str : input_types) {
+		const char *type = type_str.c_str();
 		const char *name = obs_source_get_display_name(type);
 		uint32_t caps = obs_get_source_output_flags(type);
 
