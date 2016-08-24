@@ -263,6 +263,12 @@ OBSBasicSettings::OBSBasicSettings(QWidget *parent)
 
 	ui->listWidget->setAttribute(Qt::WA_MacShowFocusRect, false);
 
+#ifdef OBS_HIDE_ADVANCED_SETTINGS
+	// DaCast: hide advanced settings
+	QListWidgetItem *advancedListItem = ui->listWidget->item(6);
+	advancedListItem->setHidden(true);
+#endif
+
 	auto policy = ui->audioSourceScrollArea->sizePolicy();
 	policy.setVerticalStretch(true);
 	ui->audioSourceScrollArea->setSizePolicy(policy);
