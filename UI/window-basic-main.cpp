@@ -764,21 +764,22 @@ bool OBSBasic::InitService()
 	return true;
 }
 
-static const double scaled_vals[] =
-{
-	1.0,
-	1.25,
-	(1.0/0.75),
-	1.5,
-	(1.0/0.6),
-	1.75,
-	2.0,
-	2.25,
-	2.5,
-	2.75,
-	3.0,
-	0.0
-};
+// DaCast: use preset resolutions
+// static const double scaled_vals[] =
+// {
+// 	1.0,
+// 	1.25,
+// 	(1.0/0.75),
+// 	1.5,
+// 	(1.0/0.6),
+// 	1.75,
+// 	2.0,
+// 	2.25,
+// 	2.5,
+// 	2.75,
+// 	3.0,
+// 	0.0
+// };
 
 bool OBSBasic::InitBasicConfigDefaults()
 {
@@ -880,20 +881,25 @@ bool OBSBasic::InitBasicConfigDefaults()
 
 	config_set_default_string(basicConfig, "Output", "BindIP", "default");
 
-	int i = 0;
-	uint32_t scale_cx = cx;
-	uint32_t scale_cy = cy;
+	// DaCast: use preset resolutions
+	config_set_default_string(basicConfig, "AdvOut", "RescaleRes", "852x480");
+	config_set_default_uint  (basicConfig, "Video", "OutputCX", OBS_DEFAULT_RESCALING_WIDTH);
+	config_set_default_uint  (basicConfig, "Video", "OutputCY", OBS_DEFAULT_RESCALING_HEIGHT);
 
-	/* use a default scaled resolution that has a pixel count no higher
-	 * than 1280x720 */
-	while (((scale_cx * scale_cy) > (1280 * 720)) && scaled_vals[i] > 0.0) {
-		double scale = scaled_vals[i++];
-		scale_cx = uint32_t(double(cx) / scale);
-		scale_cy = uint32_t(double(cy) / scale);
-	}
+	// int i = 0;
+	// uint32_t scale_cx = cx;
+	// uint32_t scale_cy = cy;
 
-	config_set_default_uint  (basicConfig, "Video", "OutputCX", scale_cx);
-	config_set_default_uint  (basicConfig, "Video", "OutputCY", scale_cy);
+	// /* use a default scaled resolution that has a pixel count no higher
+	//  * than 1280x720 */
+	// while (((scale_cx * scale_cy) > (1280 * 720)) && scaled_vals[i] > 0.0) {
+	// 	double scale = scaled_vals[i++];
+	// 	scale_cx = uint32_t(double(cx) / scale);
+	// 	scale_cy = uint32_t(double(cy) / scale);
+	// }
+
+	// config_set_default_uint  (basicConfig, "Video", "OutputCX", scale_cx);
+	// config_set_default_uint  (basicConfig, "Video", "OutputCY", scale_cy);
 
 	config_set_default_uint  (basicConfig, "Video", "FPSType", 0);
 	config_set_default_string(basicConfig, "Video", "FPSCommon", "30");
@@ -2477,10 +2483,10 @@ int OBSBasic::ResetVideo()
 	ovi.scale_type     = GetScaleType(basicConfig);
 
 	if (ovi.base_width == 0 || ovi.base_height == 0) {
-		ovi.base_width = 1920;
-		ovi.base_height = 1080;
-		config_set_uint(basicConfig, "Video", "BaseCX", 1920);
-		config_set_uint(basicConfig, "Video", "BaseCY", 1080);
+		ovi.base_width = OBS_DEFAULT_RESCALING_WIDTH;
+		ovi.base_height = OBS_DEFAULT_RESCALING_HEIGHT;
+		config_set_uint(basicConfig, "Video", "BaseCX", OBS_DEFAULT_RESCALING_WIDTH);
+		config_set_uint(basicConfig, "Video", "BaseCY", OBS_DEFAULT_RESCALING_HEIGHT);
 	}
 
 	if (ovi.output_width == 0 || ovi.output_height == 0) {

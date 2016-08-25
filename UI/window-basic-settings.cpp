@@ -979,23 +979,27 @@ static string ResString(uint32_t cx, uint32_t cy)
 	return res.str();
 }
 
-/* some nice default output resolution vals */
-static const double vals[] =
-{
-	1.0,
-	1.25,
-	(1.0/0.75),
-	1.5,
-	(1.0/0.6),
-	1.75,
-	2.0,
-	2.25,
-	2.5,
-	2.75,
-	3.0
-};
+// DaCast: use preset resolutions
+static const uint32_t vals[] = OBS_DEFAULT_RESCALING_RESOLUTIONS;
+static const size_t numVals = (sizeof(vals) / sizeof(vals[0]));
 
-static const size_t numVals = sizeof(vals)/sizeof(double);
+/* some nice default output resolution vals */
+// static const double vals[] =
+// {
+// 	1.0,
+// 	1.25,
+// 	(1.0/0.75),
+// 	1.5,
+// 	(1.0/0.6),
+// 	1.75,
+// 	2.0,
+// 	2.25,
+// 	2.5,
+// 	2.75,
+// 	3.0
+// };
+
+// static const size_t numVals = sizeof(vals)/sizeof(double);
 
 void OBSBasicSettings::ResetDownscales(uint32_t cx, uint32_t cy)
 {
@@ -1028,16 +1032,22 @@ void OBSBasicSettings::ResetDownscales(uint32_t cx, uint32_t cy)
 			QString::number(out_cy);
 	}
 
-	for (size_t idx = 0; idx < numVals; idx++) {
-		uint32_t downscaleCX = uint32_t(double(cx) / vals[idx]);
-		uint32_t downscaleCY = uint32_t(double(cy) / vals[idx]);
-		uint32_t outDownscaleCX = uint32_t(double(out_cx) / vals[idx]);
-		uint32_t outDownscaleCY = uint32_t(double(out_cy) / vals[idx]);
+	// DaCast: use preset resolutions
+	// for (size_t idx = 0; idx < numVals; idx++) {
+	// 	uint32_t downscaleCX = uint32_t(double(cx) / vals[idx]);
+	// 	uint32_t downscaleCY = uint32_t(double(cy) / vals[idx]);
+	// 	uint32_t outDownscaleCX = uint32_t(double(out_cx) / vals[idx]);
+	// 	uint32_t outDownscaleCY = uint32_t(double(out_cy) / vals[idx]);
 
-		downscaleCX &= 0xFFFFFFFC;
-		downscaleCY &= 0xFFFFFFFE;
-		outDownscaleCX &= 0xFFFFFFFE;
-		outDownscaleCY &= 0xFFFFFFFE;
+	// 	downscaleCX &= 0xFFFFFFFC;
+	// 	downscaleCY &= 0xFFFFFFFE;
+	// 	outDownscaleCX &= 0xFFFFFFFE;
+	// 	outDownscaleCY &= 0xFFFFFFFE;
+	for (size_t idx = 1; idx < numVals; idx += 2) {
+		uint32_t downscaleCX = vals[idx - 1];
+		uint32_t downscaleCY = vals[idx];
+		uint32_t outDownscaleCX = vals[idx - 1];
+		uint32_t outDownscaleCY = vals[idx];
 
 		string res = ResString(downscaleCX, downscaleCY);
 		string outRes = ResString(outDownscaleCX, outDownscaleCY);
