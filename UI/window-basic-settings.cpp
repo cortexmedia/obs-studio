@@ -269,6 +269,20 @@ OBSBasicSettings::OBSBasicSettings(QWidget *parent)
 	advancedListItem->setHidden(true);
 #endif
 
+#ifdef OBS_HIDE_AUDIO_TRACKS
+	// DaCast: hide audio track settings
+	ui->advOutStreamTrackLabel->setVisible(false);
+	ui->advOutStreamTracks->setVisible(false);
+
+	ui->advOutRecTrackLabel->setVisible(false);
+	ui->advOutRecTracks->setVisible(false);
+
+	ui->advOutAudioTrack1GroupBox->setTitle("");
+	ui->advOutAudioTrack2GroupBox->setVisible(false);
+	ui->advOutAudioTrack3GroupBox->setVisible(false);
+	ui->advOutAudioTrack4GroupBox->setVisible(false);
+#endif
+
 	auto policy = ui->audioSourceScrollArea->sizePolicy();
 	policy.setVerticalStretch(true);
 	ui->audioSourceScrollArea->setSizePolicy(policy);

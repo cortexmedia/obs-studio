@@ -11,3 +11,4 @@
 
 // DaCast-specific flags
 #define OBS_HIDE_ADVANCED_SETTINGS
+#define OBS_HIDE_AUDIO_TRACKS

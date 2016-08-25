@@ -997,7 +997,7 @@
                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                        </property>
                        <item row="1" column="0">
-                        <widget class="QLabel" name="label_28">
+                        <widget class="QLabel" name="advOutStreamTrackLabel">
                          <property name="minimumSize">
                           <size>
                            <width>170</width>
@@ -1013,7 +1013,7 @@
                         </widget>
                        </item>
                        <item row="1" column="1">
-                        <widget class="QWidget" name="widget_8" native="true">
+                        <widget class="QWidget" name="advOutStreamTracks" native="true">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                            <horstretch>0</horstretch>
@@ -1352,14 +1352,14 @@
                             </widget>
                            </item>
                            <item row="3" column="0">
-                            <widget class="QLabel" name="label_29">
+                            <widget class="QLabel" name="advOutRecTrackLabel">
                              <property name="text">
                               <string>Basic.Settings.Output.Adv.AudioTrack</string>
                              </property>
                             </widget>
                            </item>
                            <item row="3" column="1">
-                            <widget class="QWidget" name="widget_9" native="true">
+                            <widget class="QWidget" name="advOutRecTracks" native="true">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                                <horstretch>0</horstretch>
@@ -1898,7 +1898,7 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_10">
                     <item>
-                     <widget class="QGroupBox" name="groupBox">
+                     <widget class="QGroupBox" name="advOutAudioTrack1GroupBox">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                         <horstretch>0</horstretch>
@@ -2013,7 +2013,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QGroupBox" name="groupBox_2">
+                     <widget class="QGroupBox" name="advOutAudioTrack2GroupBox">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                         <horstretch>0</horstretch>
@@ -2128,7 +2128,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QGroupBox" name="groupBox_3">
+                     <widget class="QGroupBox" name="advOutAudioTrack3GroupBox">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                         <horstretch>0</horstretch>
@@ -2243,7 +2243,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QGroupBox" name="groupBox_4">
+                     <widget class="QGroupBox" name="advOutAudioTrack4GroupBox">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                         <horstretch>0</horstretch>
