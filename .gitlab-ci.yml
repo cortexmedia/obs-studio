@@ -1,0 +1,60 @@
+before_script:
+  - git submodule update --init
+
+mac:
+  stage: build
+  tags:
+    - osx
+    - qt5
+  only:
+    - dacast
+  variables:
+    Qt5Widgets_DIR: /usr/local/opt/qt5/
+  script:
+    - mkdir build
+    - cd build
+    - MACOSX_DEPLOYMENT_TARGET=10.8 cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Release -DCMAKE_CONFIGURATION_TYPES=Release -DCOPY_DEPENDENCIES=ON ..'
+    - FIXUP_BUNDLE=1 make package
+  artifacts:
+    paths:
+    - build/*.dmg
+
+win32:
+  stage: build
+  tags:
+    - vs2013
+    - qt5
+  only:
+    - dacast
+  variables:
+    DepsPath: C:\deps\ffmpeg\win32
+    QTDIR: C:\QT\5.7\msvc2013
+  script:
+    - 'call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" x86'
+    - mkdir build
+    - cd build
+    - 'c:\cmake\bin\cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CONFIGURATION_TYPES=Release -DCOPY_DEPENDENCIES=ON -DCPACK_GENERATOR=WIX ..'
+    - nmake package
+  artifacts:
+    paths:
+    - build/*.msi
+
+win64:
+  stage: build
+  tags:
+    - vs2013
+    - qt5
+  only:
+    - dacast
+  variables:
+    DepsPath: C:\deps\ffmpeg\win64
+    QTDIR: C:\QT\5.7\msvc2013_64
+  script:
+    - 'call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" amd64'
+    - mkdir build
+    - cd build
+    - 'c:\cmake\bin\cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_CONFIGURATION_TYPES=Release -DCOPY_DEPENDENCIES=ON -DCPACK_GENERATOR=WIX ..'
+    - nmake package
+  artifacts:
+    paths:
+    - build/*.msi
