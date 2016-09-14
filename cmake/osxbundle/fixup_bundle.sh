@@ -7,6 +7,23 @@ fi
 
 cd "$1"
 
+DEST="$2"
+LDEST="@rpath"
+QT_PLUGINS_DIR=/usr/local/Cellar/qt5/5.6.1-1/plugins
+
+function copy_qt_plugins() {
+	cp -R "$QT_PLUGINS_DIR/$1" "$DEST/"
+
+	PLUGINS="$(find $DEST/$1 \( -perm +111 -and -type f \))"
+
+	for lib in $PLUGINS; do
+		echo "Fixing Qt plugin $lib"
+
+		libname="$(basename "$lib")"
+		install_name_tool -id "$LDEST/$1/$libname" "$lib"
+	done
+}
+
 function buildlist() {
 	otool -L "$@" | 
 		grep -E '^\s+/' |
@@ -18,8 +35,9 @@ function buildlist() {
 }
 export -f buildlist
 
-DEST="$2"
-LDEST="@rpath"
+copy_qt_plugins platforms
+copy_qt_plugins imageformats
+
 TARGETS="$(find . \( -perm +111 -and -type f \))"
 FOUNDLIBS="$(buildlist $TARGETS)"
 PFOUNDLIBS=""
