@@ -1,0 +1,3 @@
+#pragma once
+
+#define RTMP_DACAST_API_URL "@RTMP_DACAST_API_URL@"
