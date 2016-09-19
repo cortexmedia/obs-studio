@@ -22,92 +22,138 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item alignment="Qt::AlignLeft">
-      <widget class="QListWidget" name="listWidget">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+     <item>
+      <widget class="QFrame" name="settingsLeftFrame">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
        </property>
-       <property name="maximumSize">
-        <size>
-         <width>135</width>
-         <height>16777215</height>
-        </size>
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
        </property>
-       <property name="iconSize">
-        <size>
-         <width>48</width>
-         <height>48</height>
-        </size>
-       </property>
-       <property name="currentRow">
-        <number>0</number>
-       </property>
-       <item>
-        <property name="text">
-         <string>Basic.Settings.General</string>
+       <layout class="QVBoxLayout" name="leftPane">
+        <property name="spacing">
+         <number>50</number>
         </property>
-        <property name="icon">
-         <iconset resource="obs.qrc">
-          <normaloff>:/settings/images/settings/system-settings-3.png</normaloff>:/settings/images/settings/system-settings-3.png</iconset>
+        <property name="leftMargin">
+         <number>0</number>
         </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Basic.Settings.Stream</string>
+        <property name="topMargin">
+         <number>0</number>
         </property>
-        <property name="icon">
-         <iconset resource="obs.qrc">
-          <normaloff>:/settings/images/settings/network.png</normaloff>:/settings/images/settings/network.png</iconset>
+        <property name="rightMargin">
+         <number>0</number>
         </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Basic.Settings.Output</string>
+        <property name="bottomMargin">
+         <number>0</number>
         </property>
-        <property name="icon">
-         <iconset resource="obs.qrc">
-          <normaloff>:/settings/images/settings/network-bluetooth.png</normaloff>:/settings/images/settings/network-bluetooth.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Basic.Settings.Audio</string>
-        </property>
-        <property name="icon">
-         <iconset resource="obs.qrc">
-          <normaloff>:/settings/images/settings/decibel_audio_player.png</normaloff>:/settings/images/settings/decibel_audio_player.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Basic.Settings.Video</string>
-        </property>
-        <property name="icon">
-         <iconset resource="obs.qrc">
-          <normaloff>:/settings/images/settings/video-display-3.png</normaloff>:/settings/images/settings/video-display-3.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Basic.Settings.Hotkeys</string>
-        </property>
-        <property name="icon">
-         <iconset resource="obs.qrc">
-          <normaloff>:/settings/images/settings/preferences-desktop-keyboard-shortcuts.png</normaloff>:/settings/images/settings/preferences-desktop-keyboard-shortcuts.png</iconset>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Basic.Settings.Advanced</string>
-        </property>
-        <property name="icon">
-         <iconset resource="obs.qrc">
-          <normaloff>:/settings/images/settings/advanced.png</normaloff>:/settings/images/settings/advanced.png</iconset>
-        </property>
-       </item>
+        <item>
+         <widget class="QLabel" name="logoImage">
+          <property name="styleSheet">
+           <string notr="true">background-color: transparent;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="obs.qrc">:/settings/images/settings/dacast.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="listWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>135</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+          <property name="currentRow">
+           <number>0</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>Basic.Settings.General</string>
+           </property>
+           <property name="icon">
+            <iconset resource="obs.qrc">
+             <normaloff>:/settings/images/settings/system-settings-3.png</normaloff>:/settings/images/settings/system-settings-3.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Basic.Settings.Stream</string>
+           </property>
+           <property name="icon">
+            <iconset resource="obs.qrc">
+             <normaloff>:/settings/images/settings/network.png</normaloff>:/settings/images/settings/network.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Basic.Settings.Output</string>
+           </property>
+           <property name="icon">
+            <iconset resource="obs.qrc">
+             <normaloff>:/settings/images/settings/network-bluetooth.png</normaloff>:/settings/images/settings/network-bluetooth.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Basic.Settings.Audio</string>
+           </property>
+           <property name="icon">
+            <iconset resource="obs.qrc">
+             <normaloff>:/settings/images/settings/decibel_audio_player.png</normaloff>:/settings/images/settings/decibel_audio_player.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Basic.Settings.Video</string>
+           </property>
+           <property name="icon">
+            <iconset resource="obs.qrc">
+             <normaloff>:/settings/images/settings/video-display-3.png</normaloff>:/settings/images/settings/video-display-3.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Basic.Settings.Hotkeys</string>
+           </property>
+           <property name="icon">
+            <iconset resource="obs.qrc">
+             <normaloff>:/settings/images/settings/preferences-desktop-keyboard-shortcuts.png</normaloff>:/settings/images/settings/preferences-desktop-keyboard-shortcuts.png</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Basic.Settings.Advanced</string>
+           </property>
+           <property name="icon">
+            <iconset resource="obs.qrc">
+             <normaloff>:/settings/images/settings/advanced.png</normaloff>:/settings/images/settings/advanced.png</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>

@@ -229,3 +229,11 @@ QLabel#errorLabel {
     color: rgb(192, 0, 0);
     font-weight: bold;
 }
+
+
+/* Settings Dialog */
+
+#settingsLeftFrame,
+#settingsLeftFrame #listWidget {
+    background-color: white;
+}
