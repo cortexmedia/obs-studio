@@ -157,7 +157,8 @@ private:
 
 	void          SetupEncoders();
 
-	void          CreateFirstRunSources();
+	void          CreateFirstRunSources(obs_scene_t *scene);
+	void          CreateDefaultCaptureDevice(obs_scene_t *scene, const char *source_id, const char *device_property_name);
 	void          CreateDefaultScene(bool firstStart);
 
 	void          ClearVolumeControls();

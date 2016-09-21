@@ -424,7 +424,7 @@ static inline bool HasAudioDevices(const char *source_id)
 	return count != 0;
 }
 
-void OBSBasic::CreateFirstRunSources()
+void OBSBasic::CreateFirstRunSources(obs_scene_t *scene)
 {
 	bool hasDesktopAudio = HasAudioDevices(App()->OutputAudioSource());
 	bool hasInputAudio   = HasAudioDevices(App()->InputAudioSource());
@@ -435,6 +435,10 @@ void OBSBasic::CreateFirstRunSources()
 	if (hasInputAudio)
 		ResetAudioDevice(App()->InputAudioSource(), "default",
 				Str("Basic.AuxDevice1"), 3);
+
+	// DaCast: add default video capture device
+	CreateDefaultCaptureDevice(scene, "av_capture_input", "device");
+	CreateDefaultCaptureDevice(scene, "dshow_input", "video_device_id");
 }
 
 void OBSBasic::CreateDefaultScene(bool firstStart)
@@ -450,7 +454,7 @@ void OBSBasic::CreateDefaultScene(bool firstStart)
 	obs_scene_t  *scene  = obs_scene_create(Str("Basic.Scene"));
 
 	if (firstStart)
-		CreateFirstRunSources();
+		CreateFirstRunSources(scene);
 
 	AddScene(obs_scene_get_source(scene));
 	SetCurrentScene(scene, true);
@@ -4392,6 +4396,83 @@ void OBSBasic::on_actionCenterToScreen_triggered()
 	};
 
 	obs_scene_enum_items(GetCurrentScene(), func, nullptr);
+}
+
+void OBSBasic::CreateDefaultCaptureDevice(obs_scene_t *scene, const char *source_id, const char *device_property_name)
+{
+	// must check existence of source by asking for display name because
+	// obs_source_create will succeed even for non-existant sources
+	if (!obs_source_get_display_name(source_id)) {
+		return;
+	}
+
+	obs_source_t *source = obs_source_create(source_id, "Video Capture", NULL, nullptr);
+	if (!source) {
+		return;
+	}
+
+	obs_properties_t *props = obs_source_properties(source);
+	if (!props) {
+		obs_source_release(source);
+		return;
+	}
+
+	obs_property_t *device_prop = obs_properties_get(props, device_property_name);
+	if (!device_prop) {
+		obs_source_release(source);
+		return;
+	}
+
+	size_t device_count = obs_property_list_item_count(device_prop);
+	const char* device_id = NULL;
+
+	// find a device id
+	for (size_t i = 0; i < device_count; i++) {
+		const char *name = obs_property_list_item_name(device_prop, i);
+		if (!name || *name == 0) {
+			continue;
+		}
+
+		const char *id = obs_property_list_item_string(device_prop, i);
+		if (!id || *id == 0) {
+			continue;
+		}
+
+		device_id = id;
+		break;
+	}
+
+	if (!device_id) {
+		obs_properties_destroy(props);
+		obs_source_release(source);
+		return;
+	}
+
+	obs_data_t *settings = obs_get_source_defaults(source_id);
+	if (!settings) {
+		obs_properties_destroy(props);
+		obs_source_release(source);
+		return;
+	}
+
+	// update source settings
+	obs_data_set_string(settings, device_property_name, device_id);
+	obs_property_modified(device_prop, settings);
+	obs_source_update(source, settings);
+
+	obs_scene_atomic_update(scene, [](void *data, obs_scene_t *scene) {
+		// add source to scene
+		obs_sceneitem_t *item = obs_scene_add(scene, static_cast<obs_source_t *>(data));
+
+		// fit to screen
+		obs_sceneitem_select(item, true);
+		obs_bounds_type boundsType = OBS_BOUNDS_SCALE_INNER;
+		CenterAlignSelectedItems(scene, item, &boundsType);
+	}, source);
+
+	obs_data_release(settings);
+	obs_properties_destroy(props);
+	obs_source_release(source);
 }
 
 void OBSBasic::EnablePreviewDisplay(bool enable)
