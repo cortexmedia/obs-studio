@@ -9,11 +9,12 @@ OBS_MODULE_USE_DEFAULT_LOCALE("win-capture", "en-US")
 extern struct obs_source_info duplicator_capture_info;
 extern struct obs_source_info monitor_capture_info;
 extern struct obs_source_info window_capture_info;
-extern struct obs_source_info game_capture_info;
+// DaCast: Disable game capture plugin
+// extern struct obs_source_info game_capture_info;
 
-extern bool cached_versions_match(void);
-extern bool load_cached_graphics_offsets(bool is32bit);
-extern bool load_graphics_offsets(bool is32bit);
+// extern bool cached_versions_match(void);
+// extern bool load_cached_graphics_offsets(bool is32bit);
+// extern bool load_graphics_offsets(bool is32bit);
 
 /* temporary, will eventually be erased once we figure out how to create both
  * 32bit and 64bit versions of the helpers/hook */
@@ -52,6 +53,8 @@ bool obs_module_load(void)
 
 	obs_register_source(&window_capture_info);
 
+	// DaCast: Disable game capture plugin
+	/*
 	if (USE_HOOK_ADDRESS_CACHE &&
 	    cached_versions_match() &&
 	    load_cached_graphics_offsets(IS32BIT)) {
@@ -63,6 +66,7 @@ bool obs_module_load(void)
 		load_graphics_offsets(!IS32BIT);
 		obs_register_source(&game_capture_info);
 	}
+	*/
 
 	return true;
 }

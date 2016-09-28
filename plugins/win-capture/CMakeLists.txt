@@ -14,11 +14,13 @@ set(win-capture_SOURCES
 	obfuscate.c
 	inject-library.c
 	cursor-capture.c
-	game-capture.c
+	# DaCast: Disable game capture plugin
+	#game-capture.c
 	window-helpers.c
 	monitor-capture.c
 	window-capture.c
-	load-graphics-offsets.c
+	# DaCast: Disable game capture plugin
+	#load-graphics-offsets.c
 	duplicator-monitor-capture.c
 	plugin-main.c)
 
