@@ -247,10 +247,13 @@ QWidget *OBSPropertiesView::AddText(obs_property_t *prop, QFormLayout *layout,
 		QLineEdit *edit = new QLineEdit();
 		QPushButton *show = new QPushButton();
 
-		show->setText(QTStr("Show"));
+		// DaCast: show passwords by default
+		// show->setText(QTStr("Show"));
+		show->setText(QTStr("Hide"));
 		show->setCheckable(true);
+		show->setChecked(true);
 		edit->setText(QT_UTF8(val));
-		edit->setEchoMode(QLineEdit::Password);
+		// edit->setEchoMode(QLineEdit::Password);
 
 		subLayout->addWidget(edit);
 		subLayout->addWidget(show);
