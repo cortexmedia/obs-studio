@@ -3443,7 +3443,8 @@ void OBSBasic::UploadLog(const char *file)
 	if (!*fileString)
 		return;
 
-	ui->menuLogFiles->setEnabled(false);
+	// DaCast: removed the Help menu
+	// ui->menuLogFiles->setEnabled(false);
 
 	auto data_deleter = [](obs_data_t *d) { obs_data_release(d); };
 	using data_t = unique_ptr<struct obs_data, decltype(data_deleter)>;
@@ -3529,7 +3530,8 @@ void OBSBasic::on_actionCheckForUpdates_triggered()
 
 void OBSBasic::logUploadFinished(const QString &text, const QString &error)
 {
-	ui->menuLogFiles->setEnabled(true);
+	// DaCast: removed the Help menu
+	// ui->menuLogFiles->setEnabled(true);
 
 	if (text.isEmpty()) {
 		QMessageBox::information(this,

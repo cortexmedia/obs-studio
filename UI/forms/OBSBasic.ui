@@ -840,24 +840,6 @@
     <addaction name="separator"/>
     <addaction name="actionE_xit"/>
    </widget>
-   <widget class="QMenu" name="menuBasic_MainMenu_Help">
-    <property name="title">
-     <string>Basic.MainMenu.Help</string>
-    </property>
-    <widget class="QMenu" name="menuLogFiles">
-     <property name="title">
-      <string>Basic.MainMenu.Help.Logs</string>
-     </property>
-     <addaction name="actionShowLogs"/>
-     <addaction name="actionUploadCurrentLog"/>
-     <addaction name="actionUploadLastLog"/>
-     <addaction name="actionViewCurrentLog"/>
-    </widget>
-    <addaction name="actionWebsite"/>
-    <addaction name="separator"/>
-    <addaction name="menuLogFiles"/>
-    <addaction name="actionCheckForUpdates"/>
-   </widget>
    <widget class="QMenu" name="menuBasic_MainMenu_Edit">
     <property name="title">
      <string>Basic.MainMenu.Edit</string>
@@ -944,7 +926,6 @@
    <addaction name="profileMenu"/>
    <addaction name="sceneCollectionMenu"/>
    <addaction name="menuTools"/>
-   <addaction name="menuBasic_MainMenu_Help"/>
   </widget>
   <widget class="OBSBasicStatusBar" name="statusbar"/>
   <action name="actionAddScene">
