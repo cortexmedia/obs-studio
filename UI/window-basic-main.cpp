@@ -1958,6 +1958,9 @@ void OBSBasic::TimedCheckForUpdates()
 
 void OBSBasic::CheckForUpdates()
 {
+	// DaCast: disable update checking
+	return;
+
 #ifdef UPDATE_SPARKLE
 	trigger_sparkle_update();
 #else
