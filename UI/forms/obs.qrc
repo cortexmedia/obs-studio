@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/res">
+    <file>images/dacast.png</file>
     <file>images/mute.png</file>
     <file>images/unmute.png</file>
     <file>images/configuration21_16.png</file>
@@ -16,7 +17,6 @@
     <file>images/tray_active.png</file>
   </qresource>
   <qresource prefix="/settings">
-    <file>images/settings/dacast.png</file>
     <file>images/settings/advanced.png</file>
     <file>images/settings/network.png</file>
     <file>images/settings/video-display-3.png</file>

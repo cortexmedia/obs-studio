@@ -49,13 +49,14 @@
         <item>
          <widget class="QLabel" name="logoImage">
           <property name="styleSheet">
-           <string notr="true">background-color: transparent;</string>
+           <string notr="true">background-color: transparent;
+margin-left: 6px;</string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap resource="obs.qrc">:/settings/images/settings/dacast.png</pixmap>
+           <pixmap resource="obs.qrc">:/res/images/dacast.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>false</bool>

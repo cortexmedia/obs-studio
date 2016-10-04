@@ -46,6 +46,23 @@
       <widget class="QWidget" name="verticalLayoutWidget_7">
        <layout class="QVBoxLayout" name="verticalLayout_14">
         <item>
+         <layout class="QHBoxLayout" name="topBar">
+          <item>
+           <widget class="QLabel" name="topBarLogo">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="obs.qrc">:/res/images/dacast.png</pixmap>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="previewLayout">
           <property name="spacing">
            <number>2</number>
