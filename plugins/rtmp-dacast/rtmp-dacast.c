@@ -22,7 +22,7 @@ struct http_request {
 };
 
 struct http_response {
-	DARRAY(uint8_t) data;
+	struct dstr data;
 	long status;
 	char error[CURL_ERROR_SIZE];
 };
@@ -45,7 +45,7 @@ static void add_slash(struct dstr *str)
 
 static void http_response_init(struct http_response *res)
 {
-	da_init(res->data);
+	dstr_init(&res->data);
 	res->status = 0;
 	res->error[0] = 0;
 }
@@ -53,7 +53,7 @@ static void http_response_init(struct http_response *res)
 static void http_response_destroy(struct http_response *res)
 {
 	if (res) {
-		da_free(res->data);
+		dstr_free(&res->data);
 	}
 }
 
@@ -62,7 +62,7 @@ static size_t http_response_write(uint8_t *ptr, size_t size, size_t nmemb, struc
 	size_t total = size * nmemb;
 
 	if (total > 0) {
-		da_push_back_array(res->data, ptr, total);
+		dstr_ncat(&res->data, (const char *)ptr, total);
 	}
 
 	return total;
@@ -97,7 +97,6 @@ static bool http_request_send(const struct http_request *req, struct http_respon
 {
 	CURLcode code = CURLE_OK;
 	long status = 0;
-	uint8_t null_terminator = 0;
 
 	http_response_init(res);
 
@@ -131,7 +130,6 @@ static bool http_request_send(const struct http_request *req, struct http_respon
 	curl_easy_cleanup(curl);
 
 	res->status = status;
-	da_push_back(res->data, &null_terminator);
 
 	if (code != CURLE_OK) {
 		warn("[http_request_send] Fetch of URL \"%s\" failed: %s", req->url, res->error);
@@ -176,7 +174,7 @@ static void fetch_channels(obs_properties_t *props, obs_data_t *settings, const 
 	struct dstr url = {0};
 	dstr_copy(&url, RTMP_DACAST_API_URL);
 	add_slash(&url);
-	dstr_cat(&url, "channel?_format=json&apikey=");
+	dstr_cat(&url, "external/obs/channel?apikey=");
 	dstr_cat(&url, api_key);
 	req.url = url.array;
 
@@ -188,9 +186,9 @@ static void fetch_channels(obs_properties_t *props, obs_data_t *settings, const 
 
 		dstr_copy(&error, "Error retrieving channel list: ");
 		if (res.status == 403) {
-			dstr_cat(&error, "access denied.\n\nPlease make sure the API Key is valid.");
+			dstr_cat(&error, "access denied.\n\nPlease make sure the Open Broadcaster Key is valid.");
 		}
-		else if (res.error && res.error[0]) {
+		else if (res.error[0]) {
 			dstr_cat(&error, res.error);
 		}
 		else {
@@ -206,11 +204,15 @@ static void fetch_channels(obs_properties_t *props, obs_data_t *settings, const 
 		return;
 	}
 
+	// obs_data_create_from_json does not support stringified JSON arrays as
+	// root, so wrap the array inside an object here.
+	dstr_insert(&res.data, 0, "{\"data\":");
+	dstr_cat(&res.data, "}");
+
 	obs_data_t *root = obs_data_create_from_json((const char *) res.data.array);
 
 	http_request_destroy(&req);
 	http_response_destroy(&res);
-
 
 	if (!root) {
 		rtmp_dacast_set_error(props, settings, "Error parsing JSON response.");
@@ -235,7 +237,7 @@ static void update_settings_for_channel(obs_data_t *settings, obs_data_t *channe
 		return;
 	}
 
-	const char *stream_tech = obs_data_get_string(channel, "stream_tech");
+	bool html5 = obs_data_get_bool(channel, "html5");
 	const char *server      = obs_data_get_string(channel_config, "publishing_point_primary");
 	const char *stream_key  = obs_data_get_string(channel_config, "stream_name");
 	const char *username    = obs_data_get_string(channel_config, "login");
@@ -256,7 +258,7 @@ static void update_settings_for_channel(obs_data_t *settings, obs_data_t *channe
 	obs_data_set_string(settings, "stream_key", stream_key);
 	obs_data_set_string(settings, "username", username);
 	obs_data_set_string(settings, "password", password);
-	obs_data_set_bool(settings, "use_auth", stream_tech && strcmp(stream_tech, "html5") == 0);
+	obs_data_set_bool(settings, "use_auth", html5);
 }
 
 static void rtmp_dacast_channel_id(struct dstr *dstr, obs_data_t *channel)
