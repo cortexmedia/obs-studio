@@ -3,7 +3,6 @@ project(rtmp-dacast)
 find_package(Libcurl REQUIRED)
 
 include_directories(${LIBCURL_INCLUDE_DIRS})
-include_directories(${OBS_JANSSON_INCLUDE_DIRS})
 
 set(rtmp-dacast_SOURCES
 	rtmp-dacast.c)
@@ -33,8 +32,7 @@ add_library(rtmp-dacast MODULE
 target_link_libraries(rtmp-dacast
 	libobs
 	${rtmp-dacast_PLATFORM_DEPS}
-	${LIBCURL_LIBRARIES}
-	${OBS_JANSSON_IMPORT})
+	${LIBCURL_LIBRARIES})
 
 target_include_directories(rtmp-dacast
 	PUBLIC

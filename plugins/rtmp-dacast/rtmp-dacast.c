@@ -4,7 +4,6 @@
 #include <obs-module.h>
 #include <obs-data.h>
 #include <curl/curl.h>
-#include <jansson.h>
 
 #include "lookup-config.h"
 
