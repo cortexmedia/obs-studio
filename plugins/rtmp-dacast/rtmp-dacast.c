@@ -219,13 +219,17 @@ static void fetch_channels(obs_properties_t *props, obs_data_t *settings, const 
 	}
 
 	obs_data_array_t *channels = obs_data_get_array(root, "data");
+	obs_data_release(root);
+
 	if (!channels) {
 		rtmp_dacast_set_error(props, settings, "Missing or invalid channels data in API response.");
+		return;
 	}
 
 	obs_data_set_array(settings, "channels", channels);
 	obs_data_array_release(channels);
-	obs_data_release(root);
+
+	rtmp_dacast_set_error(props, settings, NULL);
 }
 
 static void update_settings_for_channel(obs_data_t *settings, obs_data_t *channel)
