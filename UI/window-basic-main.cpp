@@ -4409,7 +4409,7 @@ void OBSBasic::CreateDefaultCaptureDevice(obs_scene_t *scene, const char *source
 		return;
 	}
 
-	obs_source_t *source = obs_source_create(source_id, "Video Capture", NULL, nullptr);
+	obs_source_t *source = obs_source_create(source_id, "Webcam", NULL, nullptr);
 	if (!source) {
 		return;
 	}
