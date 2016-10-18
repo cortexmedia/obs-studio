@@ -9,7 +9,7 @@ cd "$1"
 
 DEST="$2"
 LDEST="@rpath"
-QT_PLUGINS_DIR=/usr/local/Cellar/qt5/5.6.1-1/plugins
+QT_PLUGINS_DIR="`brew --prefix qt5`/plugins"
 
 function copy_qt_plugins() {
 	cp -R "$QT_PLUGINS_DIR/$1" "$DEST/"
