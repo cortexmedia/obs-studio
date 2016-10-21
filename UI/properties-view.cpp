@@ -255,6 +255,10 @@ QWidget *OBSPropertiesView::AddText(obs_property_t *prop, QFormLayout *layout,
 		edit->setText(QT_UTF8(val));
 		// edit->setEchoMode(QLineEdit::Password);
 
+		if (!obs_property_enabled(prop)) {
+			edit->setEnabled(false);
+		}
+
 		subLayout->addWidget(edit);
 		subLayout->addWidget(show);
 

@@ -445,6 +445,14 @@ static obs_properties_t *rtmp_dacast_properties(void *unused, obs_data_t *settin
 		obs_property_set_visible(p, false);
 	}
 
+	{
+		p = obs_properties_add_text(props, "server", "URL", OBS_TEXT_DEFAULT);
+		obs_property_set_enabled(p, false);
+
+		p = obs_properties_add_text(props, "stream_key", obs_module_text("StreamKey"), OBS_TEXT_PASSWORD);
+		obs_property_set_enabled(p, false);
+	}
+
 	return props;
 }
 
