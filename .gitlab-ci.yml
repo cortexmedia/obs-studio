@@ -13,7 +13,7 @@ mac:
   script:
     - mkdir build
     - cd build
-    - MACOSX_DEPLOYMENT_TARGET=10.8 cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Release -DCMAKE_CONFIGURATION_TYPES=Release -DCOPY_DEPENDENCIES=ON ..'
+    - cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Release -DCMAKE_CONFIGURATION_TYPES=Release -DCOPY_DEPENDENCIES=ON ..
     - FIXUP_BUNDLE=1 make package
   artifacts:
     paths:
